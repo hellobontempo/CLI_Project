@@ -1,16 +1,16 @@
 
 
 class Api 
-    attr_reader :query_1, :query_2, :query_3
+    attr_reader :ing_1, :ing_2, :ing_3
 
-    def initialize(query_1, query_2, query_3)
-        @query_1 = query_1
-        @query_2 = query_2
-        @query_3 = query_3
+    def initialize(ing_1, ing_2, ing_3)
+        @ing_1 = ing_1 
+        @ing_2 = ing_2
+        @ing_3 = ing_3
     end
 
     def fetch_recipes
-        url = "https://api.edamam.com/search?q=#{query_1}%2C+#{query_1}%2C+#{query_3}&app_id=f6079da5&app_key=e49cae3161adbbdfa4b3dfc459efa240"
+        url = "https://api.edamam.com/search?q=#{ing_1}%2C+#{ing_2}%2C+#{ing_3}&app_id=f6079da5&app_key=e49cae3161adbbdfa4b3dfc459efa240"
         uri = URI(url)
         response = Net::HTTP.get(uri)
         recipes = JSON.parse(response)

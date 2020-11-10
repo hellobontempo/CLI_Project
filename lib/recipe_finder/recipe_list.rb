@@ -16,21 +16,20 @@ class RecipeList
         @@all
     end
 
-    def self.display_recipe
+    def self.display_recipes
         counter = 0
         self.all.each do |recipe|
             counter += 1
-        puts "Recipe #{counter}/3. 2#{recipe.label}"
+        puts "RECIPE (#{counter}/3): #{recipe.label.upcase}"
         puts "Ingredients: \n #{recipe.ingredient_list.join("\n")}"
-        puts "From: #{recipe.source}"
+        puts "This recipe is from #{recipe.source}"
         puts 
-        puts "Would you like to view this article in browser?"
+        puts "View this recipe in the browser?"
         puts "1. Yes"
         puts "2. Nope - view the next recipe, please."
     
         input = gets.chomp
         index = input.to_i - 1
-    
     
             if index == 0
                 system("open #{recipe.url}")
