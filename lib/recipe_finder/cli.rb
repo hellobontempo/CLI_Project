@@ -8,7 +8,9 @@ class Cli
         puts "              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"       
         puts "Type 3 ingredients you would like to use. Hit 'enter' after each ingredient."
         self.user_input
-        api = Api.new(Cli.sort[0], Cli.sort[1], Cli.sort[2])
+        api = Api.new(sort[0], sort[1], sort[2])
+        api.create_recipes
+        RecipeList.display_recipes
         binding.pry
     end
 
@@ -20,13 +22,14 @@ class Cli
         @@input << ing_1 << ing_2 << ing_3
     end 
 
-    def self.sort
+    def sort
         @@input.sort
     end
 
-    def self.display_recipes
+    def display_recipes
         RecipeList.display_recipes
     end
- 
+    
+
 
 end

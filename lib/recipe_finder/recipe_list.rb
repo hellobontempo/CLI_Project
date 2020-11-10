@@ -25,14 +25,19 @@ class RecipeList
         puts "This recipe is from #{recipe.source}"
         puts 
         puts "View this recipe in the browser?"
-        puts "1. Yes"
+        puts "1. Yes, please!"
         puts "2. Nope - view the next recipe, please."
-    
-        input = gets.chomp
-        index = input.to_i - 1
-    
+        puts "3. Start over"
+
+            input = gets.chomp
+            index = input.to_i - 1
+            
             if index == 0
                 system("open #{recipe.url}")
+            elsif index == 3
+                Cli.new.start
+            else
+                "Please enter a valid option."
             end
         end
     end
