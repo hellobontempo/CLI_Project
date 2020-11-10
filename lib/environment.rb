@@ -11,5 +11,5 @@ require 'httparty'
 require_relative './recipe_finder/api.rb'
 require_relative './recipe_finder/api.rb'
 require_relative './recipe_finder/cli.rb'
-require_relative './recipe_finder/recipe.rb'
+require_relative './recipe_finder/recipe_list.rb'
 
