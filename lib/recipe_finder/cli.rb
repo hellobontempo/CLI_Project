@@ -2,16 +2,16 @@
 class Cli
 
     def start
-        puts "             Hey good lookin' - whatcha got cookin'?"   
-        sleep(2)  
-        puts "  But really, what's in your fridge? I'll help you find a recipe!"         
-        puts "              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
-        self.user_input
-        api = Api.new(sort[0], sort[1], sort[2])
-        api.create_recipe_list
-        self.display_recipes
-        #prompt to restart?
+        puts "                    Hey good lookin' - whatcha got cookin'?"   
+        puts "  Give us three ingredients you want to use, we'll give you three recipes to peruse."         
+        puts "                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
+        self.user_input 
+        api = Api.new(ingredient_list) 
+        api.create_recipe
+        # recipe_list = api.fetch_recipes
+        Recipe.display_all_recipes
         binding.pry
+        
     end
 
     def user_input      
@@ -24,29 +24,35 @@ class Cli
         @@input << ing_1 << ing_2 << ing_3
     end 
 
-    def sort
+    def ingredient_list
         @@input.sort
     end
 
     def display_recipes
-        RecipeList.all.each_with_index do |recipe, index|
+        Recipe.all.each_with_index do |recipe, index|
         puts "RECIPE (#{index+1}/3): #{recipe.label.upcase}"
-        puts "Ingredients: \n #{recipe.ingredient_list.join("\n")}"
+        puts "Ingredients: \n #{recipe.ingredients.join("\n")}"
         puts "            ~~~"
-        puts "This recipe is from #{recipe.source}"
+        puts "This recipe is from: #{recipe.source}"
         puts 
-        puts "View this recipe in the browser?"
-        puts "1. Yes, please!"
+        puts "Enter '1' to view recipe in browser."
         puts "Press any key to view next recipe."
-
             index = gets.strip.to_i - 1
             
             if index == 0
                 system("open #{recipe.url}")
-            # elsif index == 2
             end
-        puts 
+        # puts "Enter '2' to save recipe." #when i feel like getting complicated
+        #     index = gets.strip.to_i - 1
+        #     if index == 1
+        #         RecipeList
+        #     end
         end
+        puts "End of recipe list. Enter '1' to search with new ingredients."
+            index = gets.strip.to_i - 1
+            if index == 0
+                #take it from the top
+            end
     end
 
 
