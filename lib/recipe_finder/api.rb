@@ -1,7 +1,7 @@
 
 
 class Api 
-    attr_reader :ingredient_list
+    attr_accessor :ingredient_list
 
     #ing_1 = ingredient_list[0]
 
@@ -21,10 +21,23 @@ class Api
         #end
     end
 
-    def create_recipe
-        self.fetch_recipes.collect {|hits| Recipe.new(hits["recipe"]["label"], hits["recipe"]["ingredientLines"], hits["recipe"]["source"], hits["recipe"]["url"])}
+    def valid_ingredients?
+        if self.fetch_recipes == nil
+            false
+        elsif self.fetch_recipes.empty?
+            false
+        else
+            true
+        end
     end
 
+    def create_recipe
+        self.fetch_recipes.each {|hits| Recipe.new(hits["recipe"]["label"], hits["recipe"]["ingredientLines"], hits["recipe"]["source"], hits["recipe"]["url"])}
+    end
+
+    def clear
+        @ingredient_list.clear
+    end
 
 
 end

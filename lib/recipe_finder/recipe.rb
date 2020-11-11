@@ -4,7 +4,7 @@ class Recipe
     @@all = []
    
     def initialize (label, ingredients, source, url)
-        @label = label.sort
+        @label = label
         @ingredients = ingredients.sort
         @source = source 
         @url = url
@@ -19,9 +19,10 @@ class Recipe
         Recipe.all.each_with_index do |recipe, index|
         puts "RECIPE #{index+1}:"
         puts "#{recipe.label.upcase}"
+        puts 
         puts "Ingredients: \n#{recipe.ingredients.join("\n")}"
-        puts "            ~~~"
         puts "This recipe is from: #{recipe.source}"
+        puts "              ~~~"
         end
     end
 

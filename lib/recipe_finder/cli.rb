@@ -7,8 +7,16 @@ class Cli
         puts "                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
         self.user_input 
         api = Api.new(ingredient_list) 
-        api.create_recipe
-        # recipe_list = api.fetch_recipes
+            if api.valid_ingredients? == false
+                puts "Hmm, we couldn't find a recipe that matched. Let's try this again..."
+                #api.clear
+                Cli.new.user_input
+                api = Api.new(ingredient_list)
+                api.create_recipe
+            else
+                puts "Yum! Check out these recipes:"
+                api.create_recipe
+            end
         Recipe.display_all_recipes
         binding.pry
         
@@ -17,7 +25,7 @@ class Cli
     def user_input      
         @@input = []
         puts "Type 3 ingredients you would like to use. Hit 'enter' after each ingredient."
-        puts "If you make up ingredients, we'll try and read your mind :)"
+        puts 
         ing_1 = gets.strip  #gsub ingredients with a space, put in a +
         ing_2 = gets.strip
         ing_3 = gets.strip
