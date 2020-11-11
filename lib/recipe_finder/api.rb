@@ -17,7 +17,7 @@ class Api
         recipes["hits"][1..3]
     end
 
-    def create_recipes 
+    def create_recipe_list
         self.fetch_recipes.each {|hits| RecipeList.new(hits["recipe"]["label"], hits["recipe"]["ingredientLines"], hits["recipe"]["source"], hits["recipe"]["url"])}
     end
 
