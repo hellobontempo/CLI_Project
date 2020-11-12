@@ -25,7 +25,7 @@ class Recipe
         puts "              ~~~"
         puts "Enter #{index+1} to view recipe in browser."
         puts "-------------------------------------------"
-        puts 
+        puts #add another line to offer to save 
         end
         input = gets.strip.to_i - 1
             if input == 0

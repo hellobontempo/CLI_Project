@@ -6,21 +6,11 @@ class Cli
         puts "  Give us three ingredients you want to use, we'll give you three recipes to peruse."         
         puts "                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
         self.user_input 
-        api = Api.new(ingredient_list) 
-            if api.valid_ingredients? == false
-                puts "Hmm, we couldn't find a recipe that matched. Let's try this again..."
-                Cli.new.user_input
-                api = Api.new(ingredient_list)
-                api.create_recipe
-            else
-                puts "Yum! Check out these recipes:"
-                sleep(1)
-                api.create_recipe
-            end
+        self.fetch_api
         Recipe.display_all_recipes
-
+        #prompt to search again or view more recipes
         binding.pry
-        
+        ``
     end
 
     def user_input      
@@ -35,6 +25,20 @@ class Cli
 
     def ingredient_list
         @@input.sort
+    end
+
+    def fetch_api
+        api = Api.new(ingredient_list) 
+        if api.valid_ingredients? == false
+            puts "Hmm, we couldn't find a recipe that matched. Let's try this again..."
+            Cli.new.user_input
+            api = Api.new(ingredient_list)
+            api.create_recipe
+        else
+            puts "Yum! Check out these recipes:"
+            sleep(1)
+            api.create_recipe
+        end
     end
 
     # def display_recipes
