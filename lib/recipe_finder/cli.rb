@@ -7,10 +7,10 @@ class Cli
         puts "                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
         self.user_input 
         self.fetch_api
-        Recipe.display_all_recipes
+        Recipe.display_recipe_search_results
+        self.menu
         #prompt to search again or view more recipes
         binding.pry
-        ``
     end
 
     def user_input      
@@ -23,16 +23,16 @@ class Cli
         @@input << ing_1 << ing_2 << ing_3
     end 
 
-    def ingredient_list
+    def ingredient_input
         @@input.sort
     end
 
     def fetch_api
-        api = Api.new(ingredient_list) 
+        api = Api.new(ingredient_input) 
         if api.valid_ingredients? == false
             puts "Hmm, we couldn't find a recipe that matched. Let's try this again..."
             Cli.new.user_input
-            api = Api.new(ingredient_list)
+            api = Api.new(ingredient_input)
             api.create_recipe
         else
             puts "Yum! Check out these recipes:"
@@ -41,32 +41,17 @@ class Cli
         end
     end
 
-    # def display_recipes
-    #     Recipe.all.each_with_index do |recipe, index|
-    #     puts "RECIPE (#{index+1}/3): #{recipe.label.upcase}"
-    #     puts "Ingredients: \n #{recipe.ingredients.join("\n")}"
-    #     puts "            ~~~"
-    #     puts "This recipe is from: #{recipe.source}"
-    #     puts 
-    #     puts "Enter '1' to view recipe in browser."
-    #     puts "Press any key to view next recipe."
-    #         index = gets.strip.to_i - 1
-            
-    #         if index == 0
-    #             system("open #{recipe.url}")
-    #         end
-    #     # puts "Enter '2' to save recipe." #when i feel like getting complicated
-    #     #     index = gets.strip.to_i - 1
-    #     #     if index == 1
-    #     #         RecipeList
-    #     #     end
-    #     end
-    #     puts "End of recipe list. Enter '1' to search with new ingredients."
-    #         index = gets.strip.to_i - 1
-    #         if index == 0
-    #             #take it from the top
-    #         end
-    # end
-
+    def menu
+        puts "Choose a recipe to view details"
+        index = gets.strip.to_i - 1
+        max_limit = Recipe.all.length - 1
+            until index.between?(0,max_limit)
+                puts "Sorry that is an invalid choice"
+                index = gets.strip.to_i - 1
+            end
+            recipe_instance = Recipe.all[index]
+            # call the method that will print out the details
+            Recipe.display_recipe_details(recipe_instance)
+    end
 
 end

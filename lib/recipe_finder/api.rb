@@ -1,23 +1,17 @@
 
 class Api 
-    attr_accessor :ingredient_list
+    attr_reader :ingredient_input
 
-    #ing_1 = ingredient_list[0]
-
-    def initialize(ingredient_list)
-        @ingredient_list = ingredient_list
+    def initialize(ingredient_input)
+        @ingredient_input = ingredient_input
     end
 
     def fetch_recipes
-        #new_list = RecipeList.new(ingredient_list)
-        url = "https://api.edamam.com/search?q=#{ingredient_list[0]}%2C+#{ingredient_list[1]}%2C+#{ingredient_list[2]}&app_id=f6079da5&app_key=e49cae3161adbbdfa4b3dfc459efa240"
+        url = "https://api.edamam.com/search?q=#{ingredient_input[0]}%2C+#{ingredient_input[1]}%2C+#{ingredient_input[2]}&app_id=f6079da5&app_key=e49cae3161adbbdfa4b3dfc459efa240"
         uri = URI(url)
         response = Net::HTTP.get(uri)
         recipes = JSON.parse(response)
         recipes["hits"][1..3]
-        #recipes["hits"][1..3].each do |recipe|
-        #new_recipe = Recipe.new(new_list)
-        #end
     end
 
     def valid_ingredients?
@@ -31,8 +25,18 @@ class Api
     end
 
     def create_recipe
-        self.fetch_recipes.each {|hits| Recipe.new(hits["recipe"]["label"], hits["recipe"]["ingredientLines"], hits["recipe"]["source"], hits["recipe"]["url"])}
+        self.fetch_recipes.each {|hits| Recipe.new(hits["recipe"]["label"], hits["recipe"]["ingredientLines"], hits["recipe"]["source"], hits["recipe"]["url"], self.ingredient_input)}
     end
+
+    # def create_recipe_list
+    #     #new_list = Recipe.new(ingredient_list)
+    #     #recipes["hits"][1..3].each do |recipe|
+    #     #new_recipe = Recipe.new(new_list)
+    #     #end
+    #     new_list = Recipe.new(ingredient_list)
+    #     self.fetch_recipes.each do |hits| 
+    #         RecipeList.new(ingredient_list)}
+    # end
 
    
 
