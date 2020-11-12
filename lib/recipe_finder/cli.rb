@@ -9,7 +9,6 @@ class Cli
         api = Api.new(ingredient_list) 
             if api.valid_ingredients? == false
                 puts "Hmm, we couldn't find a recipe that matched. Let's try this again..."
-                #api.clear
                 Cli.new.user_input
                 api = Api.new(ingredient_list)
                 api.create_recipe
@@ -19,7 +18,7 @@ class Cli
                 api.create_recipe
             end
         Recipe.display_all_recipes
-        #Recipe.display_recipes_by_index
+
         binding.pry
         
     end

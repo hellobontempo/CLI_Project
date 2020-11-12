@@ -1,5 +1,4 @@
 
-
 class Api 
     attr_accessor :ingredient_list
 
@@ -35,9 +34,7 @@ class Api
         self.fetch_recipes.each {|hits| Recipe.new(hits["recipe"]["label"], hits["recipe"]["ingredientLines"], hits["recipe"]["source"], hits["recipe"]["url"])}
     end
 
-    def clear
-        @ingredient_list.clear
-    end
+   
 
 
 end
