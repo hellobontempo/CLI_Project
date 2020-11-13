@@ -27,17 +27,6 @@ class Api
     def create_recipe
         self.fetch_recipes.each {|hits| Recipe.new(hits["recipe"]["label"], hits["recipe"]["ingredientLines"], hits["recipe"]["source"], hits["recipe"]["url"], self.ingredient_input)}
     end
-
-    # def create_recipe_list
-    #     #new_list = Recipe.new(ingredient_list)
-    #     #recipes["hits"][1..3].each do |recipe|
-    #     #new_recipe = Recipe.new(new_list)
-    #     #end
-    #     new_list = Recipe.new(ingredient_list)
-    #     self.fetch_recipes.each do |hits| 
-    #         RecipeList.new(ingredient_list)}
-    # end
-
    
 
 

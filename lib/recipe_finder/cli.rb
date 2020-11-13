@@ -72,7 +72,7 @@ class Cli
         puts "Ingredients: \n#{recipe_instance.ingredients.join("\n")}"
         puts
         puts "              ~~~"
-        puts "1. View recipe in browser"
+        puts "1. Open recipe in browser"
         puts "2. Save recipe"
         puts "3. Main menu, please!"
         puts "-------------------------------------------"
@@ -87,9 +87,34 @@ class Cli
                     Recipe.saved_recipes << recipe_instance
                     sleep(1)
                     puts "Recipe saved!"
+                elsif input == 2
+                    menu
                 end
         sleep(1)
     end
+
+    # def display_saved_recipe_details(saved_recipe)
+    #     puts "#{saved_recipe.label.upcase}"
+    #     puts "This recipe is from: #{saved_recipe.source}"
+    #     puts 
+    #     puts "Ingredients: \n#{saved_recipe.ingredients.join("\n")}"
+    #     puts
+    #     puts "              ~~~"
+    #     puts "1. Open recipe in browser"
+    #     puts "2. Main menu, please!"
+    #     puts "-------------------------------------------"
+    #     input = gets.strip.to_i - 1
+    #         until input.between?(0,3)
+    #             puts "Sorry that is an invalid choice - did you pick a number from above?"
+    #             input = gets.strip.to_i - 1
+    #         end
+    #             if input == 0
+    #                 system("open #{saved_recipe.url}")
+    #             elsif input == 1
+    #          #return menu
+    #             end
+    #     sleep(1)
+    # end
 
     def menu
         puts "   ~~~"
@@ -97,29 +122,34 @@ class Cli
         puts "1. View saved recipes"
         puts "2. Go back to search results"
         puts "3. Search with three new ingredients, for three more recipes (adds to current recipe list)"
-        puts "4. Clear initial search and start over."
-        puts "5. Exit"
+        #puts "3. Clear initial search and start over."
+        puts "4. Exit"
         puts 
         user_input = gets.strip.to_i - 1
-            if user_input == 0
-                if Recipe.saved_recipes.empty?
-                    puts "You don't have any saved recipes!"
-                else 
-                    puts Recipe.display_saved_recipes
-                end
-                sleep(1)
-                self.menu
-            elsif user_input == 1
-                self.search_results
-            elsif user_input == 2
-                self.search
-                self.search_results
-            elsif user_input == 3
-                Recipe.all.clear 
-                self.search
-                self.search_results
-            elsif user_input == 4
-                puts "Bye, darlin'!"
+            until user_input.between?(0,3)
+                puts "Sorry that is an invalid choice - did you pick a number from above?"
+                user_input = gets.strip.to_i - 1
             end
+                if user_input == 0
+                    if Recipe.saved_recipes.empty?
+                        puts "You don't have any saved recipes!"
+                    else 
+                        puts Recipe.display_saved_recipes
+                    end
+                    sleep(1)
+                    self.menu
+                elsif user_input == 1
+                    self.search_results
+                # elsif user_input == 2
+                #     Cli.search
+                #     Cli.search_results
+                elsif user_input == 2
+                    self.ingredient_input.clear
+                    self.search
+                    self.search_results
+                elsif user_input == 3
+                    puts "Bye, darlin'!"
+                end
+            
     end
 end
