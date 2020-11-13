@@ -23,41 +23,12 @@ class Recipe
         end
     end
 
-
-    def self.display_recipe_details(recipe)
-        puts "#{recipe.label.upcase}"
-        puts "This recipe is from: #{recipe.source}"
-        puts 
-        puts "Ingredients: \n#{recipe.ingredients.join("\n")}"
-        puts
-        puts "              ~~~" #break all of this into another method, move to CLI
-        puts "1. View recipe in browser"
-        puts "2. Save recipe"
-        puts "3. Main menu, please!"
-        puts "-------------------------------------------"
-        input = gets.strip.to_i - 1
-            until input.between?(0,3)
-                puts "Sorry that is an invalid choice - did you pick a number from above?"
-                input = gets.strip.to_i - 1
-            end
-                if input == 0
-                    system("open #{recipe.url}")
-                elsif input == 1
-                    @@saved_recipes << recipe
-                    sleep(1)
-                    puts "Recipe saved!"
-                end
-        sleep(1)
-    end
-
-
     def self.saved_recipes
         @@saved_recipes
     end
 
     def self.display_saved_recipes
         self.saved_recipes.each_with_index.collect do |recipe, index|
-            #self.display_recipe_details(recipe)
             "#{index+1}. #{recipe.label} - #{recipe.source}" 
         end
     end

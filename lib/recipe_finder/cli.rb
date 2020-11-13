@@ -13,9 +13,6 @@ class Cli
     def search
         self.user_input 
         self.fetch_api
-        # Recipe.display_recipe_search_results
-        # self.view_recipe_details
-        # menu
     end
 
     def search_results
@@ -65,10 +62,37 @@ class Cli
             end
         sleep(1)
         recipe_instance = Recipe.all[index]
-        Recipe.display_recipe_details(recipe_instance)
+        self.display_recipe_details(recipe_instance)
+    end
+
+    def display_recipe_details(recipe_instance)
+        puts "#{recipe_instance.label.upcase}"
+        puts "This recipe is from: #{recipe_instance.source}"
+        puts 
+        puts "Ingredients: \n#{recipe_instance.ingredients.join("\n")}"
+        puts
+        puts "              ~~~"
+        puts "1. View recipe in browser"
+        puts "2. Save recipe"
+        puts "3. Main menu, please!"
+        puts "-------------------------------------------"
+        input = gets.strip.to_i - 1
+            until input.between?(0,3)
+                puts "Sorry that is an invalid choice - did you pick a number from above?"
+                input = gets.strip.to_i - 1
+            end
+                if input == 0
+                    system("open #{recipe_instance.url}")
+                elsif input == 1
+                    Recipe.saved_recipes << recipe_instance
+                    sleep(1)
+                    puts "Recipe saved!"
+                end
+        sleep(1)
     end
 
     def menu
+        puts "   ~~~"
         puts "MAIN MENU"
         puts "1. View saved recipes"
         puts "2. Go back to search results"
