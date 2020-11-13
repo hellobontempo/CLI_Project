@@ -1,5 +1,7 @@
 
 class Cli
+    attr_accessor :ingredient_input
+    
     @@input = []
 
     def start
@@ -25,8 +27,11 @@ class Cli
     def user_input      
         puts "Type 3 ingredients you would like to use. Hit 'enter' after each ingredient."
         puts "* Recipes may not include ALL of the ingredients you pick, but we'll do our best."
+        puts "Ingredient 1:" 
         ing_1 = gets.strip
+        puts "Ingredient 2:" 
         ing_2 = gets.strip
+        puts "Ingredient 3:" 
         ing_3 = gets.strip
         @@input << ing_1 << ing_2 << ing_3
     end 
@@ -38,14 +43,15 @@ class Cli
     def fetch_api
         api = Api.new(ingredient_input) 
             if api.valid_ingredients? == false
-                puts "Hmm, we couldn't find a recipe with those ingredients. Let's try this again..."
+                puts "Hmm...there was an error in processing your request. Let's try this again..."
+                puts
                 puts "{ Make sure everything is spelled correctly! :) }"
                 Cli.new.user_input
                 api = Api.new(ingredient_input)
                 api.create_recipe
             else
                 puts "Yum! Check out these recipes:"
-                puts 
+                puts "            ~~~     "
                 api.create_recipe
             end
     end
@@ -53,11 +59,11 @@ class Cli
     def view_recipe_details
         sleep(1)
         puts
-        puts "Select a recipe to view details"
+        puts "Enter a number to select a recipe to view."
         index = gets.strip.to_i - 1
         max_limit = Recipe.all.length - 1
             until index.between?(0,max_limit)
-                puts "Sorry that is an invalid choice - did you pick a number from above?"
+                puts "Sorry - invalid input. Did you pick a number from above?"
                 index = gets.strip.to_i - 1
             end
         sleep(1)
@@ -78,15 +84,19 @@ class Cli
         puts "-------------------------------------------"
         input = gets.strip.to_i - 1
             until input.between?(0,3)
-                puts "Sorry that is an invalid choice - did you pick a number from above?"
+                puts "Sorry - invalid input. Did you pick a number from above?"
                 input = gets.strip.to_i - 1
             end
                 if input == 0
                     system("open #{recipe_instance.url}")
                 elsif input == 1
-                    Recipe.saved_recipes << recipe_instance
-                    sleep(1)
-                    puts "Recipe saved!"
+                        if Recipe.saved_recipes.include?(recipe_instance) == true
+                            puts "You already saved this one!"
+                        elsif 
+                            Recipe.saved_recipes << recipe_instance
+                            sleep(1)
+                            puts "Recipe saved!"
+                        end
                 elsif input == 2
                     menu
                 end
@@ -96,11 +106,11 @@ class Cli
     def view_saved_recipe_details
         sleep(1)
         puts
-        puts "Select a saved recipe to view details"
+        puts "Enter a number to view a saved recipe"
         index = gets.strip.to_i - 1
         max_limit = Recipe.saved_recipes.length - 1
             until index.between?(0,max_limit)
-                puts "Sorry that is an invalid choice - did you pick a number from above?"
+                puts "Sorry - invalid input. Did you pick a number from above?"
                 index = gets.strip.to_i - 1
             end
         sleep(1)
@@ -120,7 +130,7 @@ class Cli
         puts "-------------------------------------------"
         input = gets.strip.to_i - 1
             until input.between?(0,1)
-                puts "Sorry that is an invalid choice - did you pick a number from above?"
+                puts "Sorry - invalid input. Did you pick a number from above?"
                 input = gets.strip.to_i - 1
             end
                 if input == 0
@@ -141,7 +151,7 @@ class Cli
         puts 
         user_input = gets.strip.to_i - 1
             until user_input.between?(0,3)
-                puts "Sorry that is an invalid choice - did you pick a number from above?"
+                puts "Sorry - invalid input. Did you pick a number from above?"
                 user_input = gets.strip.to_i - 1
             end
                 if user_input == 0

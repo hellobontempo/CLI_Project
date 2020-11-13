@@ -1,6 +1,8 @@
 
 class Recipe
-    attr_accessor :label, :ingredients, :source, :url, :ingredient_input
+    attr_accessor :label, :ingredients, :source, :url
+    attr_reader :ingredient_input
+
     @@all = []
     @@saved_recipes = []
 

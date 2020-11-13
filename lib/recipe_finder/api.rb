@@ -1,6 +1,6 @@
 
 class Api 
-    attr_accessor :ingredient_input
+    attr_reader :ingredient_input
 
     def initialize(ingredient_input)
         @ingredient_input = ingredient_input
@@ -11,17 +11,21 @@ class Api
         uri = URI(url)
         response = Net::HTTP.get(uri)
         recipes = JSON.parse(response)
-        recipes["hits"][1..3]
+        recipes["hits"][1..3] #.sample(3)
     end
 
     def valid_ingredients?
-        if self.fetch_recipes == nil
-            false
-        elsif self.fetch_recipes.empty?
-            false
-        else
-            true
+        until self.fetch_recipes.length == 3
+                false
         end
+        true
+        # if self.fetch_recipes == nil
+        #     false
+        # elsif self.fetch_recipes.empty?
+        #     false
+        # else
+        #     true
+        # end
     end
 
     def create_recipe
