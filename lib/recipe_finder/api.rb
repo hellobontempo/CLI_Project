@@ -1,6 +1,6 @@
 
 class Api 
-    attr_reader :ingredient_input
+    attr_accessor :ingredient_input
 
     def initialize(ingredient_input)
         @ingredient_input = ingredient_input

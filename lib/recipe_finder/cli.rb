@@ -1,5 +1,6 @@
 
 class Cli
+    @@input = []
 
     def start
         puts "                    Hey good lookin' - whatcha got cookin'?"   
@@ -22,7 +23,6 @@ class Cli
     end
 
     def user_input      
-        @@input = []
         puts "Type 3 ingredients you would like to use. Hit 'enter' after each ingredient."
         puts "* Recipes may not include ALL of the ingredients you pick, but we'll do our best."
         ing_1 = gets.strip
@@ -39,7 +39,7 @@ class Cli
         api = Api.new(ingredient_input) 
             if api.valid_ingredients? == false
                 puts "Hmm, we couldn't find a recipe with those ingredients. Let's try this again..."
-                puts "(Make sure everything is spelled correctly! :)"
+                puts "{ Make sure everything is spelled correctly! :) }"
                 Cli.new.user_input
                 api = Api.new(ingredient_input)
                 api.create_recipe
@@ -93,28 +93,43 @@ class Cli
         sleep(1)
     end
 
-    # def display_saved_recipe_details(saved_recipe)
-    #     puts "#{saved_recipe.label.upcase}"
-    #     puts "This recipe is from: #{saved_recipe.source}"
-    #     puts 
-    #     puts "Ingredients: \n#{saved_recipe.ingredients.join("\n")}"
-    #     puts
-    #     puts "              ~~~"
-    #     puts "1. Open recipe in browser"
-    #     puts "2. Main menu, please!"
-    #     puts "-------------------------------------------"
-    #     input = gets.strip.to_i - 1
-    #         until input.between?(0,3)
-    #             puts "Sorry that is an invalid choice - did you pick a number from above?"
-    #             input = gets.strip.to_i - 1
-    #         end
-    #             if input == 0
-    #                 system("open #{saved_recipe.url}")
-    #             elsif input == 1
-    #          #return menu
-    #             end
-    #     sleep(1)
-    # end
+    def view_saved_recipe_details
+        sleep(1)
+        puts
+        puts "Select a saved recipe to view details"
+        index = gets.strip.to_i - 1
+        max_limit = Recipe.saved_recipes.length - 1
+            until index.between?(0,max_limit)
+                puts "Sorry that is an invalid choice - did you pick a number from above?"
+                index = gets.strip.to_i - 1
+            end
+        sleep(1)
+        saved_recipe = Recipe.saved_recipes[index]
+        self.display_saved_recipe_details(saved_recipe)
+    end
+
+    def display_saved_recipe_details(saved_recipe)
+        puts "#{saved_recipe.label.upcase}"
+        puts "This recipe is from: #{saved_recipe.source}"
+        puts 
+        puts "Ingredients: \n#{saved_recipe.ingredients.join("\n")}"
+        puts
+        puts "              ~~~"
+        puts "1. Open recipe in browser"
+        puts "2. Main menu, please!"
+        puts "-------------------------------------------"
+        input = gets.strip.to_i - 1
+            until input.between?(0,1)
+                puts "Sorry that is an invalid choice - did you pick a number from above?"
+                input = gets.strip.to_i - 1
+            end
+                if input == 0
+                    system("open #{saved_recipe.url}")
+                elsif input == 1
+                    menu
+                end
+        sleep(1)
+    end
 
     def menu
         puts "   ~~~"
@@ -122,7 +137,6 @@ class Cli
         puts "1. View saved recipes"
         puts "2. Go back to search results"
         puts "3. Search with three new ingredients, for three more recipes (adds to current recipe list)"
-        #puts "3. Clear initial search and start over."
         puts "4. Exit"
         puts 
         user_input = gets.strip.to_i - 1
@@ -135,20 +149,19 @@ class Cli
                         puts "You don't have any saved recipes!"
                     else 
                         puts Recipe.display_saved_recipes
+                        self.view_saved_recipe_details
                     end
                     sleep(1)
                     self.menu
                 elsif user_input == 1
                     self.search_results
-                # elsif user_input == 2
-                #     Cli.search
-                #     Cli.search_results
                 elsif user_input == 2
-                    self.ingredient_input.clear
+                    @@input.clear
                     self.search
                     self.search_results
                 elsif user_input == 3
                     puts "Bye, darlin'!"
+                    exit
                 end
             
     end
