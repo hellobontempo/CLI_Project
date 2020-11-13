@@ -30,7 +30,7 @@ class Recipe
         puts 
         puts "Ingredients: \n#{recipe.ingredients.join("\n")}"
         puts
-        puts "              ~~~"
+        puts "              ~~~" #break all of this into another method, move to CLI
         puts "1. View recipe in browser"
         puts "2. Save recipe"
         puts "3. Main menu, please!"
@@ -56,8 +56,9 @@ class Recipe
     end
 
     def self.display_saved_recipes
-        self.saved_recipes.each_with_index do |recipe, index|
-            puts "#{index+1}. #{recipe.label} - #{recipe.source}"
+        self.saved_recipes.each_with_index.collect do |recipe, index|
+            #self.display_recipe_details(recipe)
+            "#{index+1}. #{recipe.label} - #{recipe.source}" 
         end
     end
         
