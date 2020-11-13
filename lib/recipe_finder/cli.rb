@@ -6,19 +6,22 @@ class Cli
         puts "  Give us three ingredients you want to use, we'll give you three recipes to peruse."         
         puts "                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
         self.search
-        # self.user_input 
-        # self.fetch_api
-        # Recipe.display_recipe_search_results
-        # self.view_recipe_details
-        binding.pry
+        self.search_results
+        #binding.pry
     end
 
     def search
         self.user_input 
         self.fetch_api
+        # Recipe.display_recipe_search_results
+        # self.view_recipe_details
+        # menu
+    end
+
+    def search_results
         Recipe.display_recipe_search_results
         self.view_recipe_details
-        menu
+        self.menu
     end
 
     def user_input      
@@ -45,13 +48,13 @@ class Cli
                 api.create_recipe
             else
                 puts "Yum! Check out these recipes:"
-                sleep(1)
+                puts 
                 api.create_recipe
             end
     end
 
     def view_recipe_details
-        sleep(2)
+        sleep(1)
         puts
         puts "Select a recipe to view details"
         index = gets.strip.to_i - 1
@@ -60,28 +63,39 @@ class Cli
                 puts "Sorry that is an invalid choice - did you pick a number from above?"
                 index = gets.strip.to_i - 1
             end
-            recipe_instance = Recipe.all[index]
-            # call the method that will print out the details
-            Recipe.display_recipe_details(recipe_instance)
+        sleep(1)
+        recipe_instance = Recipe.all[index]
+        Recipe.display_recipe_details(recipe_instance)
     end
 
     def menu
         puts "MAIN MENU"
         puts "1. View saved recipes"
-        puts "2. Start a new search"
+        puts "2. Go back to search results"
+        puts "3. Search with three new ingredients, for three more recipes (adds to current recipe list)"
+        puts "4. Clear initial search and start over."
+        puts "5. Exit"
         puts 
-        puts "Time to get cookin'? Type 'E' to exit!"
         user_input = gets.strip.to_i - 1
-        if user_input == 0
-            if RecipeList.all.empty? 
-                puts "You don't have any saved recipes!"
-            elsif RecipeList.all.length > 0
-                RecipeList.all
+            if user_input == 0
+                if Recipe.saved_recipes.empty?
+                    puts "You don't have any saved recipes!"
+                else 
+                    puts Recipe.display_saved_recipes
+                end
+                sleep(1)
+                self.menu
+            elsif user_input == 1
+                self.search_results
+            elsif user_input == 2
+                self.search
+                self.search_results
+            elsif user_input == 3
+                Recipe.all.clear 
+                self.search
+                self.search_results
+            elsif user_input == 4
+                puts "Bye, darlin'!"
             end
-        elsif user_input == 1
-            self.search
-        # else
-        #     puts "See ya later, darlin'"
-        end
     end
 end

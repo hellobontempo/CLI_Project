@@ -1,28 +1,28 @@
 
-class RecipeList
+# class RecipeList 
 
-    attr_accessor :ingredient_list, :recipe
-    @@all = []
+#     attr_accessor :user
+#     @@all = []
 
-    def initialize(recipe)
-        @recipe = recipe
-        save
-    end
 
-    def self.all
-        @@all 
-    end
+#     def initialize(user)
+#         @user = user
+#         @@all << self
+#     end
 
-    def save
-        @@all << self
-    end
+#     def self.all
+#         @@all 
+#     end
 
-    # def self.find_by_list(list_object)
-    #     Recipe.all.select {|r| r.recipe_list == list_object)
-    # end
+
+#     def display_recipe_list
+#             self.all.each do |recipe|
+#                 puts Recipe.display_recipe_details(recipe)
+#             end
+#     end
     
 
-end
+# end
 
 
 
