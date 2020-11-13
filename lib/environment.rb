@@ -5,7 +5,9 @@ require 'json'
 require 'net/http'
 require 'awesome_print'
 require 'httparty'
+require 'bundler'
 
+Bundler.require(:default)
 #Require necessary files
 
 require_relative './recipe_finder/api.rb'
