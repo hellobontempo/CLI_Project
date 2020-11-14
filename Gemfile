@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-gem 'pry'
 gem 'httparty'
+gem 'pry'
 gem 'json'
-gem "open-uri"
 gem 'dotenv'
+gem 'rubocop', '~> 1.3'
+gem "open-uri"
 
-
-
-
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 # gem "rails"
-
-
