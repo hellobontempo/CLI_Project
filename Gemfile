@@ -4,8 +4,11 @@ source "https://rubygems.org"
 gem 'pry'
 gem 'httparty'
 gem 'json'
-gem "nokogiri"
-gem "colorize"
+gem "open-uri"
+gem 'dotenv'
+
+
+
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 

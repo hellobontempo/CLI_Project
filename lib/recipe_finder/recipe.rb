@@ -1,4 +1,5 @@
 
+
 class Recipe
     attr_accessor :label, :ingredients, :source, :url
     attr_reader :ingredient_input
@@ -13,11 +14,13 @@ class Recipe
         @url = url
         @ingredient_input = ingredient_input
         @@all << self
+        
     end
 
     def self.all
         @@all
     end
+    
 
     def self.display_recipe_search_results
         self.all.each_with_index do |recipe, index|
