@@ -1,6 +1,4 @@
 class Cli
-    <script src="https://developer.edamam.com/attribution/badge.js"></script>
-    <div id="edamam-badge" data-color="white"></div>
     attr_accessor :ingredient_input
     
   @@input = []
@@ -31,10 +29,13 @@ class Cli
     puts "* Recipes may not include ALL of the ingredients you pick, but we'll do our best.\n\n"
     puts "Ingredient 1:"
     ing_1 = gets.strip
+    sleep(1)
     puts "Ingredient 2:"
     ing_2 = gets.strip
+    sleep(1)
     puts "Ingredient 3:\n"
     ing_3 = gets.strip
+    sleep(1)
     @@input << ing_1 << ing_2 << ing_3
   end
 
