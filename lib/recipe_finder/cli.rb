@@ -1,6 +1,8 @@
 class Cli
-  attr_accessor :ingredient_input
-
+    <script src="https://developer.edamam.com/attribution/badge.js"></script>
+    <div id="edamam-badge" data-color="white"></div>
+    attr_accessor :ingredient_input
+    
   @@input = []
 
   def start
@@ -42,7 +44,6 @@ class Cli
 
   def fetch_api
     api = Api.new(ingredient_input)
-    # binding.pry
     while api.valid_ingredients? == false
       sleep(3)
       puts "\n\n\n Hmm...there was an error in processing your request. Let's try this again...\n"
