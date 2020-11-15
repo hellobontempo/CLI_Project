@@ -19,7 +19,7 @@ API KEY: To generate your API key visit: https://developer.edamam.com/edamam-rec
 
 TO GET STARTED: In the main directory of 'CLI_PROJECT' enter 'bundle install' in your terminal to load all the necessary gems for running this program. Once complete enter 'ruby bin/run' and get to searching recipes! 
 
-ATTRIBUTION: <div id="edamam-badge" data-color="white"></div> 
+ATTRIBUTION: <div id="edamam-badge" data-color="badge"></div> 
 TERMS: https://developer.edamam.com/about/terms
 
 
