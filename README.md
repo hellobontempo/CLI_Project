@@ -1,5 +1,5 @@
 # CLI_Project
-<script src="https://developer.edamam.com/attribution/badge.js"></script>
+https://developer.edamam.com/attribution/badge.js
 WELCOME! 
 
 You've made it my Recipe Finder! Thank you for stopping by. 
@@ -19,7 +19,7 @@ API KEY: To generate your API key visit: https://developer.edamam.com/edamam-rec
 
 TO GET STARTED: In the main directory of 'CLI_PROJECT' enter 'bundle install' in your terminal to load all the necessary gems for running this program. Once complete enter 'ruby bin/run' and get to searching recipes! 
 
-ATTRIBUTION: <div id="edamam-badge" data-color="badge"></div> 
+ATTRIBUTION: 
 TERMS: https://developer.edamam.com/about/terms
 
 
