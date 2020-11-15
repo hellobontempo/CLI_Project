@@ -24,7 +24,7 @@ ATTRIBUTION: Huge thanks to Edamam for creating the API to make this CLI possibl
 
 TERMS: https://developer.edamam.com/about/terms
 
-CONTRIBUTORS: This is my first project as a student at Flatiron School. If you have any interest in adding to it, email me at clairebontempo@gmail.com. I welcome any input or collaboration! 
+CONTRIBUTORS: This is my first project as a student at Flatiron School. If you have any interest in adding to it email me at clairebontempo@gmail.com. I welcome any input or collaboration! 
 
 © 2020. This work is licensed under a CC BY-NC-SA 4.0 license. Details available here: https://creativecommons.org/licenses/by-nc-sa/4.0/
 

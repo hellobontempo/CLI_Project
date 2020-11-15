@@ -19,7 +19,7 @@ class Recipe
   end
 
   def self.display_recipe_search_results
-    self.all.each_with_index do |recipe, index|
+    all.each_with_index do |recipe, index|
       puts "#{index + 1}. #{recipe.label} - #{recipe.source}"
     end
   end
@@ -29,7 +29,7 @@ class Recipe
   end
 
   def self.display_saved_recipes
-    self.saved_recipes.each_with_index.collect do |recipe, index|
+    saved_recipes.each_with_index.collect do |recipe, index|
       "#{index + 1}. #{recipe.label} - #{recipe.source}"
     end
   end
