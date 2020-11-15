@@ -10,14 +10,6 @@ class Api
     @recipe_hits = recipes["hits"][1..5]
   end
 
-  # def fetch_recipes
-  #     url = "https://api.edamam.com/search?q=#{ingredient_input[0]}%2C+#{ingredient_input[1]}%2C+#{ingredient_input[2]}&app_id=#{ENV["API_ID"]}&app_key=#{ENV["API_KEY"]}"
-  #     uri = URI(url)
-  #     response = Net::HTTP.get(uri)
-  #     recipes = JSON.parse(response)
-  #     @recipe_hits = recipes["hits"]
-  # end
-
   def valid_ingredients?
     if @recipe_hits == nil
       false

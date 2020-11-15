@@ -46,7 +46,7 @@ class Cli
   def fetch_api
     api = Api.new(ingredient_input)
     while api.valid_ingredients? == false
-      sleep(3)
+      sleep(1)
       puts "\n\n\n Hmm...there was an error in processing your request. Let's try this again...\n"
       puts "Make sure everything is spelled correctly! :)\n"
       @@input.clear
@@ -84,7 +84,7 @@ class Cli
     puts "3. Main menu, please!"
     puts "-------------------------------------------"
     input = gets.strip.to_i - 1
-    until input.between?(0, 3)
+    until input.between?(0, 2)
       puts "Sorry - invalid input. Did you pick a number from above?"
       input = gets.strip.to_i - 1
     end
@@ -119,8 +119,7 @@ class Cli
 
   def display_saved_recipe_details(saved_recipe)
     puts "#{saved_recipe.label.upcase}"
-    puts "This recipe is from: #{saved_recipe.source}"
-    puts
+    puts "This recipe is from: #{saved_recipe.source}\n\n"
     puts "Ingredients: \n#{saved_recipe.ingredients.join("\n")}\n\n"
     puts "              ~~~"
     puts "1. Open recipe in browser"
