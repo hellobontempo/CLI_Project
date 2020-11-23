@@ -61,7 +61,7 @@ class Cli
   def view_recipe_details
     sleep(1)
     puts
-    puts "Enter a number to select a recipe to view."
+    puts "Select a number to view recipe details"
     index = gets.strip.to_i - 1
     max_limit = Recipe.all.length - 1
     until index.between?(0, max_limit)
@@ -104,7 +104,7 @@ class Cli
 
   def view_saved_recipe_details
     sleep(1)
-    puts "\n\n Enter a number to view a saved recipe \n"
+    puts "\n\n Select a number to view recipe details \n"
     index = gets.strip.to_i - 1
     max_limit = Recipe.saved_recipes.length - 1
     until index.between?(0, max_limit)
@@ -140,7 +140,7 @@ class Cli
   def menu
     puts "   ~~~"
     puts "MAIN MENU"
-    puts "1. View saved recipes"
+    puts "1. View saved recipe(s)"
     puts "2. Go back to search results"
     puts "3. ADD to recipe search results (find 5 more recipes with three different ingredients)"
     puts "4. Exit\n"
@@ -154,6 +154,7 @@ class Cli
       if Recipe.saved_recipes.empty?
         puts "You don't have any saved recipes!"
       else
+        puts "SAVED RECIPE(S):"
         puts Recipe.display_saved_recipes
         self.view_saved_recipe_details
       end
