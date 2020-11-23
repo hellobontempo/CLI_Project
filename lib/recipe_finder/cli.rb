@@ -142,7 +142,7 @@ class Cli
     puts "MAIN MENU"
     puts "1. View saved recipes"
     puts "2. Go back to search results"
-    puts "3. ADD to recipe list and search with three new ingredients"
+    puts "3. ADD to recipe search results (find 5 more recipes with three different ingredients)"
     puts "4. Exit\n"
     user_input = gets.strip.to_i - 1
     until user_input.between?(0, 3)
