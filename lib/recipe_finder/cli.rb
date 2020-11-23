@@ -1,13 +1,11 @@
 class Cli
-    attr_accessor :ingredient_input
-    
-  @@input = []
+  attr_accessor :ingredient_input
 
   def start
-    puts "\n\n\n                  Hey good lookin' - whatcha got cookin'?"
+    puts "\n\n\n                      Hey good lookin' - whatcha got cookin'?"
     puts "Trying to decide? Pick three things you want to cook with and we'll find some recipes for you."
     puts "                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    sleep(3)
+    sleep(2)
     self.search
   end
 
@@ -17,14 +15,8 @@ class Cli
     self.search_results
   end
 
-  def search_results
-    puts "\n\n SEARCH RESULTS:"
-    Recipe.display_recipe_search_results
-    self.view_recipe_details
-    self.menu
-  end
-
   def user_input
+    @input = []
     puts "\n\nType 3 ingredients. Hit 'enter' after each ingredient.\n\n"
     puts "* Recipes may not include ALL of the ingredients you pick, but we'll do our best.\n\n"
     puts "Ingredient 1:"
@@ -36,11 +28,11 @@ class Cli
     puts "Ingredient 3:\n"
     ing_3 = gets.strip
     sleep(1)
-    @@input << ing_1 << ing_2 << ing_3
+    @input << ing_1 << ing_2 << ing_3
   end
 
   def ingredient_input
-    @@input.sort
+    @input.sort
   end
 
   def fetch_api
@@ -49,7 +41,7 @@ class Cli
       sleep(1)
       puts "\n\n\n Hmm...there was an error in processing your request. Let's try this again...\n"
       puts "Make sure everything is spelled correctly! :)\n"
-      @@input.clear
+      @input.clear
       sleep(1)
       Cli.new.search
       api = Api.new(ingredient_input)
@@ -57,6 +49,13 @@ class Cli
     api.create_recipe
     puts "\n\n Yum! Check out these recipes:"
     puts "            ~~~     "
+  end
+
+  def search_results
+    puts "\n\n SEARCH RESULTS:"
+    Recipe.display_recipe_search_results
+    self.view_recipe_details
+    self.menu
   end
 
   def view_recipe_details
@@ -85,7 +84,7 @@ class Cli
     puts "-------------------------------------------"
     input = gets.strip.to_i - 1
     until input.between?(0, 2)
-      puts "Sorry - invalid input. Did you pick a number from above?"
+      puts 'Sorry - invalid input. Did you pick a number from above?'
       input = gets.strip.to_i - 1
     end
     if input == 0
@@ -163,7 +162,7 @@ class Cli
     elsif user_input == 1
       self.search_results
     elsif user_input == 2
-      @@input.clear
+      @input.clear
       self.search
       self.search_results
     elsif user_input == 3
